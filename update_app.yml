@@ -19,11 +19,17 @@
       args:
         chdir: "{{ ruta_ubuntu_debian if ansible_distribution in ['Ubuntu', 'Debian'] else ruta_fedora }}"
       when: docker_compose_ps.stdout != ''
+ 
+    - name: Ejecutar git reset --hard en el repositorio para resetear los cambios locales existente
+      command:
+        cmd: git reset --hard
+        chdir: "{{ ruta_ubuntu_debian if ansible_distribution in ['Ubuntu', 'Debian'] else ruta_fedora }}"
+      register: git_pull_result
+      changed_when: "'Already up to date.' not in git_pull_result.stdout"
 
     - name: Ejecutar git pull en el repositorio existente
       command:
-#        cmd: git pull origin main
-        cmd : git pull --force origin main
+        cmd: git pull origin main
         chdir: "{{ ruta_ubuntu_debian if ansible_distribution in ['Ubuntu', 'Debian'] else ruta_fedora }}"
       register: git_pull_result
       changed_when: "'Already up to date.' not in git_pull_result.stdout"
