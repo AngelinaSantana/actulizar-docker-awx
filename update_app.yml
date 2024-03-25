@@ -3,8 +3,8 @@
   hosts: group_servers
   become: yes
   vars:
-    ruta_ubuntu_debian: "/home/joseph/ansible/Ansible-AWX/Go App"
-    ruta_fedora: "/home/josephalmonte/ansible/Ansible-AWX/Go App"
+    ruta_ubuntu_debian: "/home/angelina/docker_awx/go"
+    ruta_fedora: "/home/asantana/docker_awx/go"
 
   tasks:
     - name: Verificar si Docker Compose está corriendo
